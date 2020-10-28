@@ -1,5 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
+import Owner from './Owner/Owner';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import petsPage from './petsPage/petsPage';
 
@@ -28,7 +28,8 @@ function App() {
           component={petsPage}
         />
         <Route render={() => <h1>404</h1>} />
-      </div>
+        <Owner />
+    </div>
     </Router>
   );
 }
