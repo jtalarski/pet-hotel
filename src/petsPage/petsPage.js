@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Link } from 'react-router-dom';
 
 class petsPage extends Component {
   state = {
@@ -57,7 +56,9 @@ class petsPage extends Component {
           ) : (
             <select
               className='ownerSelectInput'
-              onChange={(event) => this.handleChangeFor('owner_name', this.value)}
+              onChange={(event) =>
+                this.handleChangeFor('owner_name', this.value)
+              }
             >
               {this.props.store.room.map((item) => (
                 <option key={item.id} value={item.name}>
