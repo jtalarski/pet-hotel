@@ -1,6 +1,9 @@
+-- create a database named 
+-- pethotel
+
 CREATE TABLE "owner" (
     "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR (80) NOT NULL,
+    "name" VARCHAR (80) NOT NULL
 );
 
 CREATE TABLE "pet" (
