@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-class petsPage extends Component {
+class Pets extends Component {
   state = {
     newPet: {
       owner_name: '',
-      pet_id: '',
       pet_name: '',
       color: '',
       breed: '',
@@ -25,6 +22,7 @@ class petsPage extends Component {
         [propertyName]: event.target.value,
       },
     });
+    console.log('current pet state', this.state.newPet);
   };
 
   render() {
@@ -47,8 +45,13 @@ class petsPage extends Component {
           <input
             type='text'
             placeholder='Pet Breed'
-            onChange={(event) => this.handleChangeFor('pet_name', event)}
+            onChange={(event) => this.handleChangeFor('breed', event)}
           />
+
+          <select>
+            <option>Justus</option>
+            <option>Leah</option>
+          </select>
 
           <button type='submit'>Submit Pet</button>
         </form>
@@ -57,4 +60,4 @@ class petsPage extends Component {
   }
 }
 
-export default connect()(petsPage);
+export default Pets;
