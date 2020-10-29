@@ -4,6 +4,12 @@ import OwnerItem from '../OwnerItem/OwnerItem';
 
 class Owner extends Component {
 
+  componentDidMount = () => {
+    this.props.dispatch({
+      type: 'FETCH_OWNER'
+    });
+  }
+
   // stores owner changes to reduxState
   newOwnerChange = (property, event) => {
     console.log('in newOwnerChange', event.target.value);
@@ -48,7 +54,7 @@ class Owner extends Component {
             <th>Actions</th>
           </tr>
           <tr>
-            {this.props.owners.map(owner =>
+            {this.props.owner.map(owner =>
               <OwnerItem
                 owner={owner}
               />
@@ -61,7 +67,7 @@ class Owner extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-  owners: reduxState.owners,
+  owner: reduxState.owner,
   newOwner: reduxState.newOwner
 })
 
