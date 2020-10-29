@@ -1,7 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import OwnerItem from '../OwnerItem/OwnerItem';
 
 class Owner extends Component {
+
+  // stores owner changes to reduxState
+  newOwnerChange = (property, event) => {
+    console.log('in newOwnerChange', event.target.value);
+    this.props.dispatch({
+      type: 'EDIT_OWNER_FOR_UPDATE',
+      payload: {
+        [property]: event.target.value
+      },
+    });
+  }
+
+  // sends a new owner to the database
+  addOwner = () => {
+    console.log('in addOwner');
+    this.props.dispatch({
+      type: 'ADD_OWNER',
+      payload: {
+        owner: this.props.newOwner,
+      },
+    });
+  }
+
   render() {
     return (
       <div>
@@ -9,11 +33,36 @@ class Owner extends Component {
         <input
           type='text'
           placeholder='Owner Name'
+          onChange={(event) => this.newOwnerChange('name', event)}
         />
-        In Owner
+        <button
+          onClick={this.addOwner}
+        >
+          Submit
+        </button>
+        <h2>Owners</h2>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Number of Pets</th>
+            <th>Actions</th>
+          </tr>
+          <tr>
+            {this.props.owners.map(owner =>
+              <OwnerItem
+                owner={owner}
+              />
+            )}
+          </tr>
+        </table>
       </div>
-    )
+    );
   }
 }
 
-export default Owner;
+const mapStateToProps = reduxState => ({
+  owners: reduxState.owners,
+  newOwner: reduxState.newOwner
+})
+
+export default connect(mapStateToProps)(Owner);

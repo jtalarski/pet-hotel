@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+
 
 class petsPage extends Component {
   state = {
@@ -51,7 +51,7 @@ class petsPage extends Component {
             onChange={(event) => this.handleChangeFor('pet_name', event)}
           />
 
-          {this.props.store.owner === undefined ? (
+          {/* {this.props.store.owner === undefined ? (
             <div>you didn't see anything?</div>
           ) : (
             <select
@@ -68,11 +68,11 @@ class petsPage extends Component {
             </select>
           )}
 
-          <button type='submit'>Submit Pet</button>
+          <button type='submit'>Submit Pet</button> */}
         </form>
       </div>
     );
   }
 }
 
-export default connect(mapStoreToProps)(petsPage);
+export default connect()(petsPage);
