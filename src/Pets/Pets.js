@@ -12,6 +12,7 @@ class Pets extends Component {
 
   handleSubmit = () => {
     console.log('tried to add a pet');
+    this.props.dispatch({ type: 'ADD_PET', payload: this.state.newPet });
   };
 
   handleChangeFor = (propertyName, event) => {

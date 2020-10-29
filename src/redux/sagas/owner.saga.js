@@ -28,7 +28,6 @@ function* deleteOwnerSaga(action) {
 
 
 
-
 function* ownerSaga() {
   yield takeLatest('DELETE_OWNER', deleteOwnerSaga);
   yield takeLatest('FETCH_OWNER', fetchOwnerSaga);
