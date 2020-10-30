@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import OwnerItem from '../OwnerItem/OwnerItem';
+import PetItem from '../PetItem/PetItem';
 class Pets extends Component {
   state = {
     newPet: {
@@ -11,6 +11,12 @@ class Pets extends Component {
       checked_in: '',
     },
   };
+
+  componentDidMount = () => {
+    this.props.dispatch({
+      type: 'FETCH_PETS'
+    });
+  }
 
   handleSubmit = () => {
     console.log('tried to add a pet');
@@ -28,13 +34,7 @@ class Pets extends Component {
     console.log('current pet state', this.state.newPet);
   };
 
-  deletePlant = (event, id) => {
-    console.log('target pet', id);
-      this.props.dispatch({
-        type: 'DELETE_PET',
-        payload: id,})
-    this.componentDidMount();
-  };
+
 
   render() {
     return (
@@ -62,53 +62,39 @@ class Pets extends Component {
           {this.props.owner.name === undefined ? (
             <div>No owners</div>
           ) : (
-            <select
-              className='ownerSelectInput'
-              onChange={(event) => this.onChange('owner_name', event)}
-            >
-              {this.props.owner.name.map((item) => (
-                <option key={item.name} value={item.name}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          )}
+              <select
+                className='ownerSelectInput'
+                onChange={(event) => this.onChange('owner_name', event)}
+              >
+                {this.props.owner.name.map((item) => (
+                  <option key={item.name} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            )}
 
           <button type='submit'>Submit Pet</button>
         </form>
         <h2>History</h2>
         <table>
-          <tr>
-            <th>Owner</th>
-            <th>Pet</th>
-            <th>Breed</th>
-            <th>Color</th>
-            <th>Checked In</th>
-            <th>Actions</th>
-          </tr>
-          <tr>
-            {this.props.owner.map(owner =>
-              <OwnerItem
-                owner={owner}
+          <thead>
+            <tr>
+              <th>Owner</th>
+              <th>Pet</th>
+              <th>Breed</th>
+              <th>Color</th>
+              <th>Checked In</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.pets.map(pet =>
+              <PetItem
+                pet={pet}
               />
             )}
-          </tr>
-          {this.props.pets.map((item) => (
-            <tr>{item.name}</tr>
-          ))}
-          {this.props.pets.map((item) => (
-            <tr>{item.breed}</tr>
-          ))}
-          {this.props.pets.map((item) => (
-            <tr>{item.color}</tr>
-          ))}
-          {this.props.pets.map((item) => (
-            <tr>{item.checked_in}</tr>
-          ))}
-          <tr>
-            <button onClick={(event) => this.deletePet(event)}>Delete</button>
-            <button>Check In/out</button>
-          </tr>
+          </tbody>
         </table>
       </div>
     );

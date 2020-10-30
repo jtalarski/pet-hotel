@@ -7,10 +7,14 @@ function App() {
   return (
     <Router>
       <div className='App'>
-        <Pets />
-        <Route render={() => <h1>404</h1>} />
-        <Owner />
-
+        <Route
+          exact path="/pet"
+          component={Pets}
+        />
+        <Route
+          exact path="/owner"
+          component={Owner}
+        />
       </div>
     </Router>
   );

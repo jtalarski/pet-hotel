@@ -5,7 +5,7 @@ function* fetchPets(action) {
 
   let response = yield axios({
     method: 'GET',
-    url: `/api/pet/${action.payload}`,
+    url: `/api/pet/`,
   });
   console.log('response', response.data);
   yield put({
@@ -28,7 +28,7 @@ function* deletePet(action) {
   console.log('payload in delete pet', action.payload);
   let response = yield axios({
     method: 'DELETE',
-    url:`/api/pet/${action.payload}`,
+    url: `/api/pet/${action.payload}`,
     payload: action.payload
   })
   console.log('response in delete', response.data);

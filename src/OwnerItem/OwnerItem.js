@@ -13,18 +13,18 @@ class OwnerItem extends Component {
   render() {
     return (
       <>
-        <tr>{this.props.owner.name}</tr>
-        <tr>{this.props.owner.pets}</tr>
-        <tr><button
+        <td>{this.props.owner.name}</td>
+        <td>{this.props.owner.pets}</td>
+        <td><button
           onClick={this.deleteOwner}
         >Delete
-            </button></tr>
+            </button></td>
       </>
     );
   }
 }
 
-export default OwnerItem;
+export default connect()(OwnerItem);
 
 
 

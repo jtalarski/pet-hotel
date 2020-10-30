@@ -1,5 +1,6 @@
 from app import app
 from flask import jsonify, g
+import logging
 
 
 @app.route('/')
@@ -10,6 +11,7 @@ def index():
     return "Hello, Justus!"
 
 import psycopg2
+import psycopg2.extras
 #connect to db
 con = psycopg2.connect(
   host="localhost",
@@ -19,32 +21,33 @@ con = psycopg2.connect(
 )
 
 #cursor
-cur = con.cursor()
+cur = con.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-# cur.execute("INSERT INTO pet (owner_name, name, breed, color) VALUES(%s, %s, %s, %s)", (1, 'fido', 'lab', 'brown'))
-#execute query
-cur.execute("select * from pet")
-
-rows = cur.fetchall()
-
-for r in rows:
-  print (f"id {r[0]} name {r[1]}")
-
-#commit the transaction
-con.commit()
-
-#close the cursor
-cur.close()
-
-#close the connection
-con.close()
-
-@app.route('/pets', methods=["GET"])
+@app.route('/api/pet', methods=["GET"])
 def pets():
-    index = 0
-    while index < len(rows):
-      return (rows[index])
-      # change the condition (add one to the index)
-      index = index + 1
+    # cur.execute("INSERT INTO pet (owner_name, name, breed, color) VALUES(%s, %s, %s, %s)", (1, 'fido', 'lab', 'brown'))
+    #execute query
+
+    cur.execute("select * from pet")
+    rows = cur.fetchall()
+    return (f"{rows}")
+
+    #commit the transaction
+    con.commit()
+
+    #close the cursor
+    cur.close()
+
+    #close the connection
+    con.close()
+
+
+
+
+    # index = 0
+    # while index < len(rows):
+    #   return (rows[index])
+    #   # change the condition (add one to the index)
+    #   index = index + 1
 
 

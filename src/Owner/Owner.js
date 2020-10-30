@@ -48,18 +48,20 @@ class Owner extends Component {
         </button>
         <h2>Owners</h2>
         <table>
-          <tr>
-            <th>Name</th>
-            <th>Number of Pets</th>
-            <th>Actions</th>
-          </tr>
-          <tr>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number of Pets</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
             {this.props.owner.map(owner =>
               <OwnerItem
                 owner={owner}
               />
             )}
-          </tr>
+          </tbody>
         </table>
       </div>
     );
