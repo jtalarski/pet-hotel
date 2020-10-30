@@ -5,7 +5,7 @@ function* fetchPets(action) {
 
   let response = yield axios({
     method: 'GET',
-    url: `/api/pet/`,
+    url: `http://localhost:5000/api/pet/`,
   });
   console.log('response', response.data);
   yield put({
